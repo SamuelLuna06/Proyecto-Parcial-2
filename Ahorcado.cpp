@@ -2,6 +2,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <time.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -56,7 +57,7 @@ public:
             break;
         }
 
-        for (auto i = 0; i < palabra.length(); i++)
+        for (std::string::size_type i; i < palabra.length(); i++)
         {
             cout << "_";
         }
@@ -74,10 +75,11 @@ public:
 
             letrasUsadas.push_back(letra);
 
-            for (auto i = 0; i < letrasCorrectas.size(); i++)
+            for (std::string::size_type i = 0; i < letrasCorrectas.size(); i++)
             {
-                if (letrasCorrectas[i] == palabra[i])
+                if (std::find(palabra.begin(), palabra.end(), letrasCorrectas[i]) != palabra.end())
                 {
+                    cout << "Felicidades!! Has completado la palabra." << endl;
                     palabraCompleta = true;
                 }
                 else
@@ -87,27 +89,31 @@ public:
             }
 
             correcto = false;
+            bool letraEncontrada = false;
+            letra = tolower(letra);
 
-            for (auto i = 0; i < palabra.length(); i++)
+            for (std::string::size_type i = 0; i < palabra.length(); i++)
             {
-                if (letra == palabra[i])
+                if (letra == tolower(palabra[i]))
                 {
                     correcto = true;
+                    letraEncontrada = true;
                     letrasCorrectas.push_back(letra);
                     cout << "La letra " << letra << " esta en la palabra." << endl;
                 }
-                else
-                {
-                    intentos--;
-                    cout << "La letra " << letra << " no esta en la palabra. Te quedan " << intentos << " intentos." << endl;
-                }
             }
 
-            for (auto i = 0; i < palabra.length(); i++)
+            if (!letraEncontrada)
             {
-                if (letra == palabra[i])
+                intentos--;
+                cout << "La letra " << letra << " no esta en la palabra. Te quedan " << intentos << " intentos." << endl;
+            }
+
+            for (std::string::size_type i = 0; i < palabra.length(); i++)
+            {
+                if (std::find(letrasCorrectas.begin(), letrasCorrectas.end(), static_cast<char>(tolower(palabra[i]))) != letrasCorrectas.end())
                 {
-                    cout << letra;
+                    cout << palabra[i];
                 }
                 else
                 {
