@@ -11,7 +11,7 @@ int main(){
 
     /*ahorcado.tipoCategoria();*/
 
-    multilista.menu();
+    ahorcado.menu();
 
     return 0;
 }   
