@@ -30,6 +30,70 @@ private:
 public:
     Ahorcado() {}
 
+    void crearMuneco(int intentos)
+    {
+        switch (intentos)
+        {
+        case 6:
+            cout << "    _________" << endl;
+            cout << "   |        |" << endl;
+            cout << "   |         " << endl;
+            cout << "   |  " << endl;
+            cout << "   |  " << endl;
+            cout << "   |  " << endl;
+            cout << "_______" << endl;
+            break;
+        case 5:
+            cout << "    _________" << endl;
+            cout << "   |        |" << endl;
+            cout << "   |        O" << endl;
+            cout << "   |  " << endl;
+            cout << "   |  " << endl;
+            cout << "   |  " << endl;
+            cout << "_______" << endl;
+            break;
+        case 4:
+            cout << "    _________" << endl;
+            cout << "   |        |" << endl;
+            cout << "   |        O" << endl;
+            cout << "   |       /|" << endl;
+            cout << "   |  " << endl;
+            cout << "   |  " << endl;
+            cout << "_______" << endl;
+            break;
+        case 3:
+            cout << "    _________" << endl;
+            cout << "   |        |" << endl;
+            cout << "   |        O" << endl;
+            cout << "   |       /|\\" << endl;
+            cout << "   |  " << endl;
+            cout << "   |  " << endl;
+            cout << "_______" << endl;
+            break;
+        case 2:
+            cout << "    _________" << endl;
+            cout << "   |        |" << endl;
+            cout << "   |        O" << endl;
+            cout << "   |       /|\\" << endl;
+            cout << "   |       /" << endl;
+            cout << "   |  " << endl;
+            cout << "_______" << endl;
+            break;
+        case 1:
+            cout << "    _________" << endl;
+            cout << "   |        |" << endl;
+            cout << "   |        O" << endl;
+            cout << "   |       /|\\" << endl;
+            cout << "   |       / \\" << endl;
+            cout << "   |  " << endl;
+            cout << "_______" << endl;
+            break;
+        default:
+            cout << "Opcion no valida." << endl;
+            break;
+        }
+    }
+
     void jugar()
     {
         srand(time(NULL));
@@ -94,8 +158,10 @@ public:
 
             if (!letraEncontrada)
             {
+                crearMuneco(intentos);
                 intentos--;
                 cout << "La letra " << letra << " no esta en la palabra. Te quedan " << intentos << " intentos." << endl;
+                
             }
 
             string palabraUsuario = "";
