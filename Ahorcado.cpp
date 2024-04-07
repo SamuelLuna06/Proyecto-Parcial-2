@@ -10,7 +10,7 @@ class Ahorcado
 {
 
 private:
-    int elegirPalabra = 1 + rand() % 5;
+    int elegirPalabra;
     int opcion;
     int intentos;
     int opcionMenu;
@@ -20,18 +20,20 @@ private:
     char letra;
     string palabra;
     vector<char> letrasCorrectas;
-    vector<string> frutas = {"Cereza", "Manzana", "Pera", "Uva", "Platano"};
-    vector<string> profesiones = {"Abogado", "Arquitecto", "Astronauta", "Bombero", "Carpintero"};
-    vector<string> paises = {"Colombia", "Argentina", "Brasil", "Chile", "Ecuador"};
-    vector<string> deportes = {"Futbol", "Baloncesto", "Voleibol", "Tenis", "Natacion"};
-    vector<string> colores = {"Rojo", "Azul", "Verde", "Amarillo", "Naranja"};
-    vector<string> mezcla = {"Cereza", "Abogado", "Colombia", "Futbol", "Rojo"};
+    vector<string> frutas = {"cereza", "manzana", "pera", "uva", "platano"};
+    vector<string> profesiones = {"abogado", "arquitecto", "astronauta", "bombero", "carpintero"};
+    vector<string> paises = {"colombia", "argentina", "brasil", "chile", "ecuador"};
+    vector<string> deportes = {"futbol", "baloncesto", "voleibol", "tenis", "natacion"};
+    vector<string> colores = {"rojo", "azul", "verde", "amarillo", "naranja"};
+    vector<string> mezcla = {"cereza", "abogado", "colombia", "futbol", "rojo"};
 
 public:
     Ahorcado() {}
 
     void jugar()
     {
+        srand(time(NULL));
+        elegirPalabra = 1 + rand() % 5;
         switch (opcionMenu)
         {
         case 1:
@@ -75,19 +77,6 @@ public:
 
             letrasUsadas.push_back(letra);
 
-            for (std::string::size_type i = 0; i < letrasCorrectas.size(); i++)
-            {
-                if (std::find(palabra.begin(), palabra.end(), letrasCorrectas[i]) != palabra.end())
-                {
-                    cout << "Felicidades!! Has completado la palabra." << endl;
-                    palabraCompleta = true;
-                }
-                else
-                {
-                    palabraCompleta = false;
-                }
-            }
-
             correcto = false;
             bool letraEncontrada = false;
             letra = tolower(letra);
@@ -109,18 +98,28 @@ public:
                 cout << "La letra " << letra << " no esta en la palabra. Te quedan " << intentos << " intentos." << endl;
             }
 
+            string palabraUsuario = "";
+
             for (std::string::size_type i = 0; i < palabra.length(); i++)
             {
                 if (std::find(letrasCorrectas.begin(), letrasCorrectas.end(), static_cast<char>(tolower(palabra[i]))) != letrasCorrectas.end())
                 {
+                    palabraUsuario += palabra[i];
                     cout << palabra[i];
                 }
                 else
                 {
+                    palabraUsuario += "_";
                     cout << "_";
                 }
             }
             cout << endl;
+
+            if (palabraUsuario == palabra)
+            {
+                palabraCompleta = true;
+                cout << "Felicidades, has adivinado la palabra!!" << endl;
+            }
         }
     }
 
